@@ -1,15 +1,15 @@
 // src/app/pages/login/login.page.ts
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, RouterModule],
+  imports: [CommonModule, FormsModule, IonicModule],
   templateUrl: './login.page.html',
 })
 export class LoginPageComponent {
@@ -21,10 +21,10 @@ export class LoginPageComponent {
   async login() {
     try {
       const res = await this.authService.login(this.email, this.password).toPromise();
-      this.authService.guardarCredenciales(res.token, res.userId);
-      this.router.navigate(['/profile']);
+      this.authService.guardarSesion(res);
+      this.router.navigate(['/tabs/home']);
     } catch (err: any) {
-      alert(err?.error?.msg || 'Login fallido');
+      alert(err?.error?.msg || 'Credenciales incorrectas');
     }
   }
 }

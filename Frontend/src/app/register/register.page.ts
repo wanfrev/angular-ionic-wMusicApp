@@ -1,24 +1,25 @@
+// src/app/pages/register/register.page.ts
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, RouterModule],
+  imports: [CommonModule, FormsModule, IonicModule],
   templateUrl: './register.page.html',
 })
 export class RegisterPageComponent {
+  username = '';
   email = '';
   password = '';
   confirmPassword = '';
+  idRol = '2'; // 1 para artista, 2 para usuario normal
 
-  private API_BASE_URL = 'https://tu-api.com'; // cambia esta URL por la real
-
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   async register() {
     if (this.password !== this.confirmPassword) {
@@ -27,15 +28,14 @@ export class RegisterPageComponent {
     }
 
     try {
-      const res = await this.http.post<any>(`${this.API_BASE_URL}/users/register`, {
-        email: this.email,
-        password: this.password,
-      }).toPromise();
+      const res = await this.authService
+        .register(this.username, this.email, this.password, this.idRol)
+        .toPromise();
 
       alert('Registro exitoso. Inicia sesión.');
       this.router.navigate(['/login']);
     } catch (err: any) {
-      alert(err?.error?.msg || 'Error en el registro');
+      alert(err?.error?.message || 'Error en el registro');
     }
   }
 }

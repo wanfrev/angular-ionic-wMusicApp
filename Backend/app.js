@@ -6,11 +6,16 @@ import rolRoutes from "./src/routes/rol.js";
 import artistRoutes from "./src/routes/artist.js";
 import playlistRoutes from "./src/routes/playlist.js";
 import songsRoutes from "./src/routes/songs.js";
+import cors from 'cors';
 
 connectDB();
 
 configDotenv();
 const app = express();
+app.use(cors({
+  origin: 'http://localhost:4200',
+  credentials: true,
+}));
 const PORT = process.env.PORT ?? 4000;
 
 app.use(express.json());

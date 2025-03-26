@@ -14,7 +14,8 @@ export class SearchPageComponent {
   query = '';
   results: string[] = [];
 
-  realizarBusqueda() {
+  realizarBusqueda(event: string) {
+    this.query = event; // Actualiza la consulta con el valor recibido
     this.results = this.query
       ? [`Resultado 1 para "${this.query}"`, `Resultado 2 para "${this.query}"`]
       : [];

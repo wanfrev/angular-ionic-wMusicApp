@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { LoginPageComponent } from './login/login.page';
 import { RegisterPageComponent } from './register/register.page';
+import { ProfilePageComponent } from './profile/profile.page';
+import { HomePageComponent } from './home/home.page';
+import { SearchPageComponent } from './search/search.page';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -11,10 +14,10 @@ export const routes: Routes = [
   { path: 'search', component: SearchPageComponent },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./login/login.page').then( m => m.LoginPageComponent)
   },
   {
     path: 'register',
-    loadComponent: () => import('./register/register.page').then( m => m.RegisterPage)
+    loadComponent: () => import('./register/register.page').then( m => m.RegisterPageComponent)
   },
 ];

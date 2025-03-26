@@ -1,9 +1,0 @@
-.search-container {
-  padding: 20px;
-  background-color: var(--ion-color-primary-tint);
-  color: var(--ion-color-primary-contrast);
-}
-
-.search-container h1 {
-  color: var(--ion-color-primary);
-}

@@ -1,3 +1,8 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
 .register-container {
   width: 100%;
   height: 100%;
@@ -24,10 +29,10 @@
 .register-container input {
   margin-bottom: 10px;
   padding: 10px;
-  border: 0px;
+  border: 1px solid var(--ion-color-primary-shade);
   border-radius: 5px;
   background-color: var(--ion-color-light);
-  color: var(--ion-color-light-contrast);
+  color: var(--ion-color-dark);
 }
 
 .register-container button {

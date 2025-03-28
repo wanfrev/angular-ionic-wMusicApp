@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule],
   templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPageComponent {
   email = '';

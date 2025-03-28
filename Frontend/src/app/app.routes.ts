@@ -12,12 +12,4 @@ export const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'search', component: SearchPageComponent },
-  {
-    path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPageComponent)
-  },
-  {
-    path: 'register',
-    loadComponent: () => import('./register/register.page').then( m => m.RegisterPageComponent)
-  },
 ];

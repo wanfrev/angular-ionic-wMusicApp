@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule],
   templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
 export class RegisterPageComponent {
   username = '';

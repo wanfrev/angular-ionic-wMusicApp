@@ -1,9 +1,0 @@
-<ion-content class="ion-padding">
-  <app-search-bar (search)="realizarBusqueda($event)"></app-search-bar>
-
-  <ul>
-    <li *ngFor="let result of results">{{ result }}</li>
-  </ul>
-
-  <p *ngIf="results.length === 0">No hay resultados.</p>
-</ion-content>

@@ -1,0 +1,18 @@
+<ion-content>
+  <div class="playlist-container">
+    <h1>Mis Playlists</h1>
+
+    <ion-item>
+      <ion-label position="floating">Nombre de nueva playlist</ion-label>
+      <ion-input [(ngModel)]="newPlaylistName"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" (click)="createPlaylist()">Crear Playlist</ion-button>
+
+    <ion-list>
+      <ion-item *ngFor="let playlist of playlists" (click)="openPlaylist(playlist._id)">
+        <ion-label>{{ playlist.name }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

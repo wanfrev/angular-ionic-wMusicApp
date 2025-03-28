@@ -1,0 +1,34 @@
+<ion-content>
+  <div class="form-container">
+    <h1>Subir Canción</h1>
+
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input [(ngModel)]="songForm.title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Artista</ion-label>
+      <ion-input [(ngModel)]="songForm.artist"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Álbum (opcional)</ion-label>
+      <ion-input [(ngModel)]="songForm.album"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">URL de Portada</ion-label>
+      <ion-input [(ngModel)]="songForm.albumCover"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Archivo de audio</ion-label>
+      <input type="file" (change)="onAudioFileSelected($event)" accept="audio/*" />
+    </ion-item>
+
+    <ion-button expand="full" (click)="submitSong()">Subir Canción</ion-button>
+
+    <p *ngIf="message">{{ message }}</p>
+  </div>
+</ion-content>

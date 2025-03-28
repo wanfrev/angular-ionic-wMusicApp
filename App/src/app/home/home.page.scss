@@ -1,0 +1,170 @@
+.icon-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  color: #495057;
+  transition: color 0.3s;
+}
+
+.icon:hover {
+  color: #007bff;
+}
+
+.container {
+  padding: 16px;
+  overflow-y: auto;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Título */
+strong {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: #343a40;
+}
+
+.explore-title {
+  cursor: pointer;
+}
+
+
+.carousel {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.carousel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.carousel-inner {
+  display: flex;
+  flex-direction: row;
+}
+
+.carousel-item {
+  display: inline-block;
+  margin-right: 16px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 200px;
+  border: 2px solid transparent;
+}
+
+.carousel-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail {
+  width: 200px;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-info {
+  margin-top: 8px;
+  text-align: center;
+  width: 100%;
+}
+
+.movie-info h2 strong {
+  margin: 0;
+  font-size: 1rem;
+  color: #343a40;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-info p {
+  margin: 4px 0 0;
+  color: #6c757d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fab-container {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fab-button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.fab-button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.fab-button .icon {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}

@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true">
+  <div class="content">
+    <div class="icon-container">
+      <img src="assets/icons/search-outline.svg" (click)="navigateTo('search')" class="icon" alt="Buscar" />
+      <img src="assets/icons/person-outline.svg" (click)="navigateTo('profile')" class="icon" alt="Perfil" />
+    </div>
+
+    <div class="container">
+      <strong class="explore-title" (click)="navigateTo('explore')">Explorar Música</strong>
+      <div class="carousel">
+        <div class="carousel-inner">
+          <div *ngFor="let song of exploreSongs" (click)="navigateToDetail(song.id)" class="carousel-item">
+            <div class="thumbnail">
+              <img [src]="song.albumCover" alt="Portada del Álbum" />
+            </div>
+            <div class="song-info">
+              <h2><strong>{{ song.title }}</strong></h2>
+              <p>{{ song.artist }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

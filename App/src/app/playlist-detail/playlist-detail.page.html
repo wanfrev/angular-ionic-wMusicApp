@@ -1,0 +1,31 @@
+<ion-content *ngIf="playlist">
+  <div class="playlist-detail-container">
+    <h1>{{ playlist.name }}</h1>
+
+    <ion-list *ngIf="playlist.songs?.length > 0; else noSongs">
+      <ion-item *ngFor="let song of playlist.songs">
+        <ion-thumbnail slot="start">
+          <img [src]="song.albumCover" alt="Portada del álbum" />
+        </ion-thumbnail>
+
+        <ion-label>
+          <h2>{{ song.title }}</h2>
+          <p>{{ song.artist }}</p>
+          <audio controls [src]="song.audioUrl"></audio>
+        </ion-label>
+
+        <ion-button fill="clear" color="danger" slot="end" (click)="removeSong(song._id)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+    <ng-template #noSongs>
+      <p style="text-align: center; margin-top: 2rem;">Esta playlist no tiene canciones aún.</p>
+    </ng-template>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="errorMessage">
+  <p class="error-message">{{ errorMessage }}</p>
+</ion-content>

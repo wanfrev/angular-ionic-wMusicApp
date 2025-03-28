@@ -1,15 +1,13 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './login/login.page';
-import { RegisterPageComponent } from './register/register.page';
-import { ProfilePageComponent } from './profile/profile.page';
-import { HomePageComponent } from './home/home.page';
-import { SearchPageComponent } from './search/search.page';
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginPageComponent },
-  { path: 'register', component: RegisterPageComponent },
-  { path: 'profile', component: ProfilePageComponent },
-  { path: 'home', component: HomePageComponent },
-  { path: 'search', component: SearchPageComponent },
+  { path: 'login', loadComponent: () => import('./login/login.page').then((m) => m.LoginPageComponent) },
+  { path: 'register', loadComponent: () => import('./register/register.page').then((m) => m.RegisterPageComponent) },
+  {
+    path: 'tabs',
+    canActivate: [authGuard],
+    loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
+  },
 ];

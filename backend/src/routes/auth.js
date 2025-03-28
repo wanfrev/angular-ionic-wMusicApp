@@ -1,29 +1,22 @@
-// filepath: c:\Users\luis3\OneDrive\Desktop\Spotify-Angular\backend\src\routes\auth.js
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { registerSchema, loginSchema } = require('../validators/userValidator'); // Importa los esquemas de validación
 
 const router = express.Router();
 
 // Registro de usuario
-router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: 'El email no es válido' });
-  }
-
-  if (password.length < 8) {
-    return res.status(400).json({ error: 'La contraseña debe tener al menos 8 caracteres' });
-  }
-
+router.post('/register', async (req, res, next) => {
   try {
+    // Validar los datos de entrada
+    const { error } = registerSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
+    const { email, password } = req.body;
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: 'El usuario ya está registrado' });
@@ -37,19 +30,21 @@ router.post('/register', async (req, res) => {
 
     res.status(201).json({ token, user: { id: newUser._id, email }, mensaje: 'Usuario registrado con éxito' });
   } catch (error) {
-    res.status(500).json({ error: 'Error al registrar usuario: ' + error.message });
+    next(error); // Pasa el error al middleware de manejo de errores
   }
 });
 
 // Inicio de sesión
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
-  }
-
+router.post('/login', async (req, res, next) => {
   try {
+    // Validar los datos de entrada
+    const { error } = loginSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
+    const { email, password } = req.body;
+
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos' });
@@ -64,7 +59,7 @@ router.post('/login', async (req, res) => {
 
     res.json({ token, user: { id: user._id, email }, mensaje: 'Inicio de sesión exitoso' });
   } catch (error) {
-    res.status(500).json({ error: 'Error al iniciar sesión: ' + error.message });
+    next(error); // Pasa el error al middleware de manejo de errores
   }
 });
 

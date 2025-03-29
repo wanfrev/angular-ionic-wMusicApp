@@ -9,40 +9,34 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicFeatureModule, FormsModule]
+  imports: [IonicFeatureModule, FormsModule],
 })
 export class LoginPage implements OnInit {
   username: string = '';
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   handleLogin() {
     if (!this.username || !this.password) {
-      alert('Por favor, complete todos los campos.');
+      alert('Por favor, completa todos los campos.');
       return;
     }
 
     this.authService.login({
-      email: this.username,
+      username: this.username,
       password: this.password
     }).subscribe({
       next: (res) => {
         this.authService.saveToken(res.token);
-        alert('Inicio de sesión exitoso');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']); // ✅ Redirige a Home
       },
       error: (err) => {
-        alert(err.error?.message || 'Error al iniciar sesión');
+        this.errorMessage = err.error?.error || 'Error al iniciar sesión';
       }
     });
-  }
-
-  // Nueva función para navegar a la página de registro
-  navigateToRegister() {
-    this.router.navigate(['/register']);
   }
 }

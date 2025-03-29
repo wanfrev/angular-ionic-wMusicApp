@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonicFeatureModule, FormsModule]
+  imports: [IonicFeatureModule, FormsModule],
 })
 export class RegisterPage implements OnInit {
   username: string = '';
@@ -18,13 +18,13 @@ export class RegisterPage implements OnInit {
   confirmPassword: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   handleRegister() {
     if (!this.username || !this.email || !this.password || !this.confirmPassword) {
-      alert('Por favor, complete todos los campos.');
+      alert('Por favor, completa todos los campos.');
       return;
     }
 
@@ -34,23 +34,17 @@ export class RegisterPage implements OnInit {
     }
 
     this.authService.register({
-      name: this.username,
+      username: this.username,
       email: this.email,
       password: this.password
     }).subscribe({
       next: (res) => {
         this.authService.saveToken(res.token);
-        alert('Usuario registrado con éxito');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']); // ✅ Redirige a Home
       },
       error: (err) => {
-        alert(err.error?.message || 'Error al registrar');
+        this.errorMessage = err.error?.error || 'Error al registrar usuario';
       }
     });
-  }
-
-  // Nueva función para navegar a la página de inicio de sesión
-  navigateToLogin() {
-    this.router.navigate(['/login']);
   }
 }

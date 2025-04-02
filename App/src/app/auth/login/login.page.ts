@@ -1,42 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { IonicFeatureModule } from '../../ionic.module';
+import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  standalone: true,
-  imports: [IonicFeatureModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule
+  ]
 })
-export class LoginPage implements OnInit {
-  username: string = '';
+export class LoginPage {
+  email: string = '';
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {}
-
-  handleLogin() {
-    if (!this.username || !this.password) {
-      alert('Por favor, completa todos los campos.');
-      return;
-    }
-
-    this.authService.login({
-      username: this.username,
-      password: this.password
-    }).subscribe({
+  onLogin() {
+    this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
-        this.authService.saveToken(res.token);
-        this.router.navigate(['/home']); // ✅ Redirige a Home
+        this.router.navigate(['/home']); // Redirige al home tras login
       },
       error: (err) => {
         this.errorMessage = err.error?.error || 'Error al iniciar sesión';
       }
     });
+  }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
   }
 }

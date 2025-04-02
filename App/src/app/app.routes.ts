@@ -3,6 +3,7 @@ import { HomePage } from './home/home.page';
 import { SearchPage } from './search/search.page';
 import { ProfilePage } from './profile/profile.page';
 import { PlaylistPage } from './playlists/playlist.page';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -20,30 +21,37 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomePage
+    component: HomePage,
+    canActivate: [AuthGuard]
   },
   {
     path: 'search',
-    component: SearchPage
+    component: SearchPage,
+    canActivate: [AuthGuard]
   },
   {
     path: 'playlist',
-    component: PlaylistPage
+    component: PlaylistPage,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    component: ProfilePage
+    component: ProfilePage,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'detail-movie/:id',
-    loadComponent: () => import('./detail-song/detail-song.page').then(m => m.DetailSongPage)
+    path: 'song/:id', // ✅ corregido
+    loadComponent: () => import('./detail-song/detail-song.page').then(m => m.DetailSongPage),
+    canActivate: [AuthGuard]
   },
   {
-    path: 'mymovies',
-    loadComponent: () => import('./mymusic/mymusic.page').then( m => m.MyMusicPage)
+    path: 'mymusic', // ✅ corregido
+    loadComponent: () => import('./mymusic/mymusic.page').then(m => m.MyMusicPage),
+    canActivate: [AuthGuard]
   },
   {
-    path: 'library-detail',
-    loadComponent: () => import('./playlist-detail/playlist-detail.page').then( m => m.PlaylistDetailPage)
+    path: 'playlist-detail/:id', // ✅ corregido
+    loadComponent: () => import('./playlist-detail/playlist-detail.page').then(m => m.PlaylistDetailPage),
+    canActivate: [AuthGuard]
   }
 ];

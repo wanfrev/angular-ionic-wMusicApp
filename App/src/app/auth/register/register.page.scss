@@ -1,71 +1,82 @@
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: #1e1e1e; /* Fondo oscuro */
+  color: #f0f0f0; /* Texto claro */
 }
 
 form {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-width: 100%;
-height: auto;
-text-align: center;
-}
-
-.form-group {
-width: 100%;
-margin-bottom: 15px;
-}
-
-label {
-display: block;
-margin-bottom: 5px;
-color: #333;
-font-weight: 600;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background: #2a2a2a; /* Fondo del formulario */
+  border-radius: 20px;
+  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
 }
 
 input {
-width: 50%;
-height: auto;
-padding: 10px 15px;
-border: 2px solid #555;
-border-radius: 8px;
-box-sizing: border-box;
-font-size: 16px;
-background-color: #fff;
-color: #333;
+  background: #2a2a2a;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  padding: 15px;
+  box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #3e3e3e;
+  outline: none;
 }
 
-.login-button {
-width: 50%;
-padding: 10px 15px;
-margin-top: 20px;
-background-color: #007bff;
-color: #fff;
-border: none;
-border-radius: 8px;
-font-size: 16px;
-cursor: pointer;
-transition: background-color 0.3s;
+input::placeholder {
+  color: #888; /* Placeholder en gris */
 }
 
-.login-button:hover {
-background-color: #0056b3;
+button {
+  background: #2a2a2a;
+  color: #fff; /* Texto blanco */
+  font-weight: bold;
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px #141414, -5px -5px 10px #3e3e3e;
+  transition: all 0.3s ease;
 }
 
-.register-button {
-margin-top: 10px;
-background: none;
-border: none;
-color: #007bff;
-cursor: pointer;
-font-size: 14px;
-text-decoration: underline;
+button:hover {
+  background: #3e3e3e;
+  box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #3e3e3e;
 }
 
-.register-button:hover {
-color: #0056b3;
+.error-message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ff6b6b;
+  text-align: center;
+}
+
+.redirect-link {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #28a745;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: center;
+}
+
+.redirect-link {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #fff; /* Texto blanco */
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: center;
+}
+
+.redirect-link:hover {
+  color: #ccc; /* Color más claro al pasar el cursor */
 }

@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { MusicService } from '../services/music.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, HttpClientModule]
+  imports: [CommonModule, FormsModule, IonicModule]
 })
 export class HomePage implements OnInit {
   popularSongs: any[] = [];
@@ -20,39 +17,28 @@ export class HomePage implements OnInit {
   exploreSongs: any[] = [];
   errorMessage: string = '';
 
-  constructor(
-    private router: Router,
-    private musicService: MusicService,
-    private http: HttpClient
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.verifySession();
     this.loadSongs();
   }
 
-  verifySession() {
-    this.http.get('http://localhost:5000/api/user/session').subscribe({
-      next: () => {},
-      error: () => this.router.navigate(['/login']),
-    });
-  }
-
   loadSongs() {
-    this.musicService.getPopularSongs().subscribe({
-      next: (data) => this.popularSongs = data,
-      error: () => this.errorMessage = 'Error al cargar canciones populares'
-    });
+    // Simulación de datos locales
+    this.popularSongs = [
+      { id: '1', title: 'Canción Popular 1', artist: 'Artista 1', albumCover: 'assets/images/cover1.jpg' },
+      { id: '2', title: 'Canción Popular 2', artist: 'Artista 2', albumCover: 'assets/images/cover2.jpg' }
+    ];
 
-    this.musicService.getRecommendedSongs().subscribe({
-      next: (data) => this.recommendedSongs = data,
-      error: () => this.errorMessage = 'Error al cargar recomendaciones'
-    });
+    this.recommendedSongs = [
+      { id: '3', title: 'Canción Recomendada 1', artist: 'Artista 3', albumCover: 'assets/images/cover3.jpg' },
+      { id: '4', title: 'Canción Recomendada 2', artist: 'Artista 4', albumCover: 'assets/images/cover4.jpg' }
+    ];
 
-    this.musicService.getExploreSongs().subscribe({
-      next: (data) => this.exploreSongs = data,
-      error: () => this.errorMessage = 'Error al cargar el catálogo'
-    });
+    this.exploreSongs = [
+      { id: '5', title: 'Canción Explorar 1', artist: 'Artista 5', albumCover: 'assets/images/cover5.jpg' },
+      { id: '6', title: 'Canción Explorar 2', artist: 'Artista 6', albumCover: 'assets/images/cover6.jpg' }
+    ];
   }
 
   navigateTo(path: string) {

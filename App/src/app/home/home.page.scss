@@ -1,21 +1,33 @@
+.content {
+  background: #1e1e1e; /* Fondo oscuro */
+  color: #f0f0f0; /* Texto claro */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
 .icon-container {
   display: flex;
   justify-content: space-between;
   padding: 16px;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+  background: #1e1e1e; /* Fondo oscuro */
+  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
+  border-bottom: 1px solid #2a2a2a;
 }
 
 .icon {
   width: 32px;
   height: 32px;
   cursor: pointer;
-  color: #495057;
-  transition: color 0.3s;
+  color: #f0f0f0; /* Color claro para los íconos */
+  transition: color 0.3s, transform 0.3s;
 }
 
 .icon:hover {
-  color: #007bff;
+  color: #007bff; /* Azul brillante al pasar el cursor */
+  transform: scale(1.1); /* Efecto de zoom */
 }
 
 .container {
@@ -30,17 +42,17 @@
 }
 
 .content::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #2a2a2a; /* Fondo oscuro del scrollbar */
   border-radius: 10px;
 }
 
 .content::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #444; /* Color del scrollbar */
   border-radius: 10px;
 }
 
 .content::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #666; /* Color más claro al pasar el cursor */
 }
 
 /* Título */
@@ -48,13 +60,18 @@ strong {
   display: block;
   font-size: 1.5rem;
   margin-bottom: 16px;
-  color: #343a40;
+  color: #f0f0f0; /* Texto claro */
+  text-shadow: 2px 2px 4px #141414; /* Sombra para el texto */
 }
 
 .explore-title {
   cursor: pointer;
+  transition: color 0.3s;
 }
 
+.explore-title:hover {
+  color: #007bff; /* Azul brillante al pasar el cursor */
+}
 
 .carousel {
   overflow-x: auto;
@@ -68,17 +85,17 @@ strong {
 }
 
 .carousel::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #2a2a2a; /* Fondo oscuro del scrollbar horizontal */
   border-radius: 10px;
 }
 
 .carousel::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #444; /* Color del scrollbar horizontal */
   border-radius: 10px;
 }
 
 .carousel::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #666; /* Color más claro al pasar el cursor */
 }
 
 .carousel-inner {
@@ -92,12 +109,14 @@ strong {
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   width: 200px;
-  border: 2px solid transparent;
+  border-radius: 12px; /* Bordes redondeados */
+  background: #2a2a2a; /* Fondo oscuro */
+  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
 }
 
 .carousel-item:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #3e3e3e; /* Sombras internas al pasar el cursor */
 }
 
 .thumbnail {
@@ -122,7 +141,7 @@ strong {
 .movie-info h2 strong {
   margin: 0;
   font-size: 1rem;
-  color: #343a40;
+  color: #f0f0f0; /* Texto claro */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -130,7 +149,7 @@ strong {
 
 .movie-info p {
   margin: 4px 0 0;
-  color: #6c757d;
+  color: #888; /* Texto gris */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -146,7 +165,7 @@ strong {
 }
 
 .fab-button {
-  background-color: #007bff;
+  background: #2a2a2a; /* Fondo oscuro */
   border: none;
   border-radius: 50%;
   width: 56px;
@@ -154,17 +173,18 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
 .fab-button:hover {
-  background-color: #0056b3;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background: #3e3e3e; /* Fondo más claro al pasar el cursor */
+  box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #3e3e3e; /* Sombras internas */
+  transform: scale(1.1); /* Efecto de zoom */
 }
 
 .fab-button .icon {
   width: 24px;
   height: 24px;
-  color: #fff;
+  color: #fff; /* Ícono blanco */
 }

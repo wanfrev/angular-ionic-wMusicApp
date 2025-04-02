@@ -1,25 +1,27 @@
-<ion-content>
+<div class="content">
   <div class="search-container">
-    <ion-searchbar
+    <input
+      class="searchbar"
       [(ngModel)]="searchQuery"
-      (ionInput)="onSearch()"
+      (input)="onSearch()"
       placeholder="Buscar canciones, artistas..."
-    ></ion-searchbar>
+      type="text"
+    />
 
-    <ion-list *ngIf="searchResults.length > 0">
-      <ion-item *ngFor="let song of searchResults" (click)="goToDetail(song._id)">
-        <ion-thumbnail slot="start">
+    <div *ngIf="searchResults.length > 0" class="results-list">
+      <div *ngFor="let song of searchResults" (click)="goToDetail(song.id)" class="result-item">
+        <div class="thumbnail">
           <img [src]="song.albumCover" alt="Portada del álbum" />
-        </ion-thumbnail>
-        <ion-label>
+        </div>
+        <div class="song-info">
           <h2>{{ song.title }}</h2>
           <p>{{ song.artist }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
+        </div>
+      </div>
+    </div>
 
     <p *ngIf="searchQuery && searchResults.length === 0" class="no-results">
       No se encontraron canciones.
     </p>
   </div>
-</ion-content>
+</div>

@@ -8,10 +8,9 @@ import { IonicFeatureModule } from './ionic.module';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { CommonModule } from '@angular/common';
-import { MovieDetailPage } from './detail-song/detail-song.page';
 
 @NgModule({
-  declarations: [AppComponent, MovieDetailPage],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

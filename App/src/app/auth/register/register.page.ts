@@ -1,50 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { IonicFeatureModule } from '../../ionic.module';
+import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  standalone: true,
-  imports: [IonicFeatureModule, FormsModule],
+  imports: [
+      CommonModule,
+      FormsModule,
+      IonicModule,
+      RouterModule
+    ]
 })
-export class RegisterPage implements OnInit {
-  username: string = '';
+export class RegisterPage {
   email: string = '';
   password: string = '';
-  confirmPassword: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {}
-
-  handleRegister() {
-    if (!this.username || !this.email || !this.password || !this.confirmPassword) {
-      alert('Por favor, completa todos los campos.');
-      return;
-    }
-
-    if (this.password !== this.confirmPassword) {
-      alert('Las contraseñas no coinciden');
-      return;
-    }
-
-    this.authService.register({
-      username: this.username,
-      email: this.email,
-      password: this.password
-    }).subscribe({
+  onRegister() {
+    this.authService.register(this.email, this.password).subscribe({
       next: (res) => {
-        this.authService.saveToken(res.token);
-        this.router.navigate(['/home']); // ✅ Redirige a Home
+        this.router.navigate(['/home']); // Redirige después de registrarse
       },
       error: (err) => {
-        this.errorMessage = err.error?.error || 'Error al registrar usuario';
+        this.errorMessage = err.error?.error || 'Error al registrar';
       }
     });
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 }

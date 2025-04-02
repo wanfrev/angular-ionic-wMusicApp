@@ -1,5 +1,8 @@
 .content {
   padding: 16px;
+  height: 100vh;
+  background: #1e1e1e; /* Fondo oscuro */
+  color: #f0f0f0; /* Texto claro */
 }
 
 #container {
@@ -9,27 +12,52 @@
   justify-content: center;
   height: 100%;
   padding: 16px;
+  background: #2a2a2a; /* Fondo del contenedor */
+  border-radius: 20px;
+  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   margin: 16px;
+  color: #f0f0f0; /* Color claro para el ícono */
+  transition: color 0.3s, transform 0.3s;
+}
+
+.icon:hover {
+  color: #007bff; /* Azul brillante al pasar el cursor */
+  transform: scale(1.1); /* Efecto de zoom */
+}
+
+strong {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: #f0f0f0; /* Texto claro */
+  text-shadow: 2px 2px 4px #141414; /* Sombra para el texto */
+}
+
+p {
+  font-size: 16px;
+  margin: 8px 0;
+  color: #888; /* Texto gris */
 }
 
 .signout-button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   margin-top: 20px;
-  background-color: #007bff;
-  color: white;
+  background: #2a2a2a; /* Fondo oscuro */
+  color: #fff; /* Texto blanco */
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 25px;
   font-size: 16px;
-  transition: background-color 0.3s;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px #141414, -5px -5px 10px #3e3e3e; /* Sombras para neumorfismo */
+  transition: all 0.3s ease;
 }
 
 .signout-button:hover {
-  background-color: #0056b3;
+  background: #3e3e3e; /* Fondo más claro al pasar el cursor */
+  box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #3e3e3e; /* Sombras internas */
 }

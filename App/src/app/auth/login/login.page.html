@@ -1,16 +1,9 @@
-<ion-content [fullscreen]="true">
-  <div class="container">
-    <form (ngSubmit)="handleLogin()">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" [(ngModel)]="username" name="username" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" required>
-      </div>
-      <button class="login-button" type="submit">Sign In</button>
-      <button class="register-button" (click)="navigateToRegister()">Register</button>
-    </form>
-  </div>
-</ion-content>
+<div class="container">
+  <form (submit)="onLogin()">
+    <input [(ngModel)]="email" name="email" type="email" placeholder="Correo" required />
+    <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required />
+    <button type="submit">Iniciar Sesión</button>
+    <p class="error-message">{{ errorMessage }}</p>
+    <div class="redirect-link" (click)="goToRegister()">¿No tienes cuenta? Regístrate</div>
+  </form>
+</div>

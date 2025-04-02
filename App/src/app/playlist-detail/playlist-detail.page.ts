@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PlaylistService } from '../services/playlist.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,36 +8,29 @@ import { CommonModule } from '@angular/common';
   templateUrl: './playlist-detail.page.html',
   styleUrls: ['./playlist-detail.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule],
+  imports: [CommonModule, IonicModule, RouterModule]
 })
 export class PlaylistDetailPage implements OnInit {
   playlist: any;
   errorMessage: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private playlistService: PlaylistService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     const playlistId = this.route.snapshot.paramMap.get('id');
-    if (playlistId) {
-      this.playlistService.getPlaylistById(playlistId).subscribe({
-        next: (data) => this.playlist = data,
-        error: () => this.errorMessage = 'No se pudo cargar la playlist'
-      });
-    }
+
+    // Simulación de datos locales
+    this.playlist = {
+      _id: playlistId,
+      name: 'Mi Playlist Favorita',
+      songs: [
+        { _id: '1', title: 'Canción 1' },
+        { _id: '2', title: 'Canción 2' },
+      ]
+    };
   }
 
-  // Eliminar canción (opcional)
   removeSong(songId: string) {
-    if (!this.playlist || !this.playlist._id) return;
-
-    this.playlistService.removeSongFromPlaylist(this.playlist._id, songId).subscribe({
-      next: () => {
-        this.playlist.songs = this.playlist.songs.filter((s: any) => s._id !== songId);
-      },
-      error: () => console.error('Error al eliminar canción de la playlist')
-    });
+    this.playlist.songs = this.playlist.songs.filter((s: any) => s._id !== songId);
   }
 }

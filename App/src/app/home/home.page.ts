@@ -1,51 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular'; // Importar IonicModule
+import { Router } from '@angular/router';
+import { SpotifyService } from '../services/spotify.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule]
+  imports: [CommonModule, IonicModule], // Importar módulos necesarios
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Permitir componentes personalizados de Ionic
 })
 export class HomePage implements OnInit {
-  popularSongs: any[] = [];
-  recommendedSongs: any[] = [];
   exploreSongs: any[] = [];
-  errorMessage: string = '';
+  popularTracks: any[] = [];
+  newReleases: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private spotifyService: SpotifyService, private router: Router) {}
 
-  ngOnInit(): void {
-    this.loadSongs();
-  }
+  ngOnInit() {
+    this.spotifyService.getFeaturedPlaylists().subscribe({
+      next: res => {
+        this.exploreSongs = res.playlists.map((p: any) => ({
+          id: p.id,
+          title: p.name,
+          artist: p.description,
+          albumCover: p.imageUrl
+        }));
+      },
+      error: err => console.error('Error en featured:', err)
+    });
 
-  loadSongs() {
-    // Simulación de datos locales
-    this.popularSongs = [
-      { id: '1', title: 'Canción Popular 1', artist: 'Artista 1', albumCover: 'assets/images/cover1.jpg' },
-      { id: '2', title: 'Canción Popular 2', artist: 'Artista 2', albumCover: 'assets/images/cover2.jpg' }
-    ];
+    this.spotifyService.getPopularTracks().subscribe({
+      next: res => {
+        this.popularTracks = res.tracks;
+      },
+      error: err => console.error('Error en populares:', err)
+    });
 
-    this.recommendedSongs = [
-      { id: '3', title: 'Canción Recomendada 1', artist: 'Artista 3', albumCover: 'assets/images/cover3.jpg' },
-      { id: '4', title: 'Canción Recomendada 2', artist: 'Artista 4', albumCover: 'assets/images/cover4.jpg' }
-    ];
-
-    this.exploreSongs = [
-      { id: '5', title: 'Canción Explorar 1', artist: 'Artista 5', albumCover: 'assets/images/cover5.jpg' },
-      { id: '6', title: 'Canción Explorar 2', artist: 'Artista 6', albumCover: 'assets/images/cover6.jpg' }
-    ];
+    this.spotifyService.getNewReleases().subscribe({
+      next: res => {
+        this.newReleases = res.releases;
+      },
+      error: err => console.error('Error en lanzamientos:', err)
+    });
   }
 
   navigateTo(path: string) {
     this.router.navigate([`/${path}`]);
   }
 
-  navigateToDetail(songId: string) {
-    this.router.navigate(['/detail-song', songId]);
+  navigateToDetail(id: string) {
+    this.router.navigate([`/detail-song`, id]);
   }
 }

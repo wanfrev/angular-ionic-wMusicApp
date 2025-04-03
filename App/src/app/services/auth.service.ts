@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 
@@ -7,12 +7,17 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/api/auth'; // Ajusta si usas otra IP o puerto
+  private apiUrl = 'http://localhost:5000/api/auth';
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  register(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, { email, password }).pipe(
+  register(username: string, email: string, password: string, confirmPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, {
+      username,
+      email,
+      password,
+      confirmPassword
+    }).pipe(
       tap((res: any) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
@@ -22,8 +27,11 @@ export class AuthService {
     );
   }
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
+  login(login: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, {
+      login,
+      password
+    }).pipe(
       tap((res: any) => {
         if (res.token) {
           localStorage.setItem('token', res.token);

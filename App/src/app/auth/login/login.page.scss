@@ -4,22 +4,25 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
   background: #1e1e1e; /* Fondo oscuro */
   color: #f0f0f0; /* Texto claro */
 }
 
-form {
+.form-container {
   width: 100%;
-  max-width: 400px;
+  height: 100%;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  background: #2a2a2a; /* Fondo del formulario */
-  border-radius: 20px;
-  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
+  justify-content: center;
+  align-items: center;
+  background: #1e1e1e; /* Fondo del formulario */
 }
 
 input {
+  width: 90%;
+  max-width: 400px;
   background: #2a2a2a;
   color: #f0f0f0;
   border: none;
@@ -36,6 +39,8 @@ input::placeholder {
 }
 
 button {
+  width: 90%;
+  max-width: 400px;
   background: #2a2a2a;
   color: #fff; /* Texto blanco */
   font-weight: bold;
@@ -52,31 +57,26 @@ button:hover {
   box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #3e3e3e;
 }
 
-.error-message {
+.error {
   margin-top: 10px;
   font-size: 14px;
   color: #ff6b6b;
   text-align: center;
 }
 
-.redirect-link {
+.redirect {
   margin-top: 20px;
   font-size: 14px;
-  color: #007bff;
-  text-decoration: underline;
-  cursor: pointer;
+  color: #f0f0f0;
   text-align: center;
 }
 
-.redirect-link {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #fff; /* Texto blanco */
-  text-decoration: underline;
-  cursor: pointer;
-  text-align: center;
+.redirect a {
+  color: #4caf50; /* Color del enlace */
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.redirect-link:hover {
-  color: #ccc; /* Color más claro al pasar el cursor */
+.redirect a:hover {
+  text-decoration: underline;
 }

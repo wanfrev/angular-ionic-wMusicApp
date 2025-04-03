@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { SpotifyService } from '../services/spotify.service';
 
 @Component({
   selector: 'app-search',
@@ -21,22 +22,25 @@ export class SearchPage {
     { id: '4', title: 'Canción 4', artist: 'Artista 4', albumCover: 'assets/images/cover4.jpg' },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private spotifyService: SpotifyService) {}
 
-  onSearch() {
-    if (this.searchQuery.trim() === '') {
-      this.searchResults = [];
-      return;
-    }
-
-    // Simulación de búsqueda local
-    const query = this.searchQuery.toLowerCase();
-    this.searchResults = this.allSongs.filter(
-      (song) =>
-        song.title.toLowerCase().includes(query) ||
-        song.artist.toLowerCase().includes(query)
-    );
+onSearch() {
+  if (this.searchQuery.trim() === '') {
+    this.searchResults = [];
+    return;
   }
+
+  this.spotifyService.searchTracks(this.searchQuery).subscribe(
+    data => {
+      this.searchResults = data.tracks;
+    },
+    error => {
+      console.error('Error al buscar:', error);
+      this.searchResults = [];
+    }
+  );
+}
+
 
   goToDetail(songId: string) {
     this.router.navigate(['/detail-song', songId]);

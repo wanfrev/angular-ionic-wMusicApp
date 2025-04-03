@@ -1,9 +1,14 @@
-<div class="container">
-  <form (submit)="onRegister()">
-    <input [(ngModel)]="email" name="email" type="email" placeholder="Correo" required />
-    <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required />
-    <button type="submit">Registrarse</button>
-    <p class="error-message">{{ errorMessage }}</p>
-    <div class="redirect-link" (click)="goToLogin()">¿Ya tienes cuenta? Inicia sesión</div>
-  </form>
+<div class="form-container">
+  <input type="text" [(ngModel)]="username" placeholder="Nombre de usuario" required />
+  <input type="email" [(ngModel)]="email" placeholder="Correo electrónico" required />
+  <input type="password" [(ngModel)]="password" placeholder="Contraseña" required />
+  <input type="password" [(ngModel)]="confirmPassword" placeholder="Confirmar contraseña" required />
+
+  <button (click)="register()">Registrarse</button>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <p class="redirect">
+    ¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión aquí</a>
+  </p>
 </div>

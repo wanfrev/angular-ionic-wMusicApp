@@ -115,4 +115,87 @@ router.get('/preview', async (req, res) => {
   }
 });
 
+router.get('/popular-tracks', async (req, res) => {
+  try {
+    const token = await getValidSpotifyAccessToken();
+
+    const response = await axios.get(
+      'https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        params: { limit: 10 }
+      }
+    );
+
+    const tracks = response.data.items.map(item => {
+      const track = item.track;
+      return {
+        id: track.id,
+        title: track.name,
+        artist: track.artists.map(a => a.name).join(', '),
+        albumCover: track.album.images[0]?.url,
+        previewUrl: track.preview_url
+      };
+    });
+
+    res.json({ tracks });
+  } catch (error) {
+    console.error('Error al obtener canciones populares:', error.message);
+    res.status(500).json({ error: 'Error al obtener canciones populares' });
+  }
+});
+
+router.get('/new-releases', async (req, res) => {
+  try {
+    const token = await getValidSpotifyAccessToken();
+
+    const response = await axios.get(
+      'https://api.spotify.com/v1/browse/new-releases',
+      {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { country: 'US', limit: 10 }
+      }
+    );
+
+    const releases = response.data.albums.items.map(album => ({
+      id: album.id,
+      title: album.name,
+      artist: album.artists.map(a => a.name).join(', '),
+      albumCover: album.images[0]?.url
+    }));
+
+    res.json({ releases });
+  } catch (error) {
+    console.error('Error al obtener nuevos lanzamientos:', error.message);
+    res.status(500).json({ error: 'Error al obtener nuevos lanzamientos' });
+  }
+});
+
+
+router.get('/featured-playlists', async (req, res) => {
+  try {
+    const token = await getValidSpotifyAccessToken();
+
+    const response = await axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
+      headers: { Authorization: `Bearer ${token}` },
+      params: { country: 'US', limit: 10 }
+    });
+
+    const playlists = response.data.playlists.items.map(p => ({
+      id: p.id,
+      name: p.name,
+      description: p.description,
+      imageUrl: p.images[0]?.url
+    }));
+
+    res.json({ playlists });
+  } catch (error) {
+    console.error('Error al obtener playlists destacadas:', error.message);
+    res.status(500).json({ error: 'No se pudieron obtener las playlists destacadas' });
+  }
+});
+
+
 module.exports = router;

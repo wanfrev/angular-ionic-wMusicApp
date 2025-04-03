@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +18,21 @@ import { IonicModule } from '@ionic/angular';
   ]
 })
 export class LoginPage {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  login = ''; // puede ser username o email
+  password = '';
+  errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  onLogin() {
-    this.authService.login(this.email, this.password).subscribe({
+  loginUser() {
+    this.http.post<any>('http://localhost:5000/api/auth/login', {
+      login: this.login,
+      password: this.password
+    }).subscribe({
       next: (res) => {
-        this.router.navigate(['/home']); // Redirige al home tras login
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('user', JSON.stringify(res.user));
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         this.errorMessage = err.error?.error || 'Error al iniciar sesión';
@@ -34,7 +40,4 @@ export class LoginPage {
     });
   }
 
-  goToRegister() {
-    this.router.navigate(['/register']);
-  }
 }

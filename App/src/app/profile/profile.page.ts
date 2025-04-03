@@ -2,62 +2,46 @@ import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Location } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    HttpClientModule,
-  ],
+  imports: [CommonModule, FormsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProfilePage implements OnInit {
-  username: string = '';
   email: string = '';
+  username: string = '';
 
-  constructor(private router: Router, private http: HttpClient, private location: Location) {}
+  constructor(
+    private router: Router,
+    private location: Location,
+    private authService: AuthService
+  ) {}
 
-ngOnInit() {
-  console.log('ProfilePage initialized');
-  this.getUserProfile();
-}
+  ngOnInit() {
+    console.log('ProfilePage initialized');
+    this.loadUserProfile();
+  }
 
-getUserProfile() {
-  this.http.get<{ username: string; email: string }>(
-    'http://localhost:5000/api/users/profile',
-    { withCredentials: true }
-  )
-  .subscribe(
-    (data) => {
-      this.username = data.username;
-      this.email = data.email;
-    },
-    (error) => {
-      console.error('Error al obtener el perfil:', error);
-      this.router.navigate(['/login']);
+  loadUserProfile() {
+    const user = this.authService.getUser();
+    if (user && user.email) {
+      this.email = user.email;
+      this.username = user.username;
+    } else {
+      this.router.navigate(['/auth/login']);
     }
-  );
-}
+  }
 
 
   signOut() {
-    this.http.post('http://localhost:5000/api/users/logout', {}, { withCredentials: true }).subscribe(
-      () => {
-        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        this.router.navigate(['/login']);
-      },
-      (error: any) => {
-        console.error('Error al cerrar sesión:', error);
-      }
-    );
+    this.authService.logout(); // Usar el método de logout del AuthService
   }
-
 
   navigateBack() {
     this.location.back();

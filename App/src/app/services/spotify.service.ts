@@ -50,4 +50,9 @@ export class SpotifyService {
     });
   }
 
+  getRecommendations(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/recommendations`, {
+      headers: this.getAuthHeaders()
+    });
+  }
 }

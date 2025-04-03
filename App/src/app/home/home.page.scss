@@ -13,7 +13,7 @@
   justify-content: space-between;
   padding: 16px;
   background: #1e1e1e; /* Fondo oscuro */
-  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras suaves */
   border-bottom: 1px solid #2a2a2a;
 }
 
@@ -108,20 +108,20 @@ strong {
   margin-right: 16px;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
-  width: 200px;
+  width: 180px;
   border-radius: 12px; /* Bordes redondeados */
   background: #2a2a2a; /* Fondo oscuro */
-  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras suaves */
 }
 
 .carousel-item:hover {
   transform: scale(1.05);
-  box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #3e3e3e; /* Sombras internas al pasar el cursor */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombras más intensas al pasar el cursor */
 }
 
 .thumbnail {
-  width: 200px;
-  height: 300px;
+  width: 100%;
+  height: 250px;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -132,13 +132,13 @@ strong {
   object-fit: cover;
 }
 
-.movie-info {
+.song-info {
   margin-top: 8px;
   text-align: center;
   width: 100%;
 }
 
-.movie-info h2 strong {
+.song-info h2 strong {
   margin: 0;
   font-size: 1rem;
   color: #f0f0f0; /* Texto claro */
@@ -147,7 +147,7 @@ strong {
   text-overflow: ellipsis;
 }
 
-.movie-info p {
+.song-info p {
   margin: 4px 0 0;
   color: #888; /* Texto gris */
   white-space: nowrap;
@@ -155,6 +155,7 @@ strong {
   text-overflow: ellipsis;
 }
 
+/* Botones flotantes */
 .fab-container {
   position: fixed;
   bottom: 16px;
@@ -173,13 +174,13 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras suaves */
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
 .fab-button:hover {
   background: #3e3e3e; /* Fondo más claro al pasar el cursor */
-  box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #3e3e3e; /* Sombras internas */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombras más intensas */
   transform: scale(1.1); /* Efecto de zoom */
 }
 
@@ -187,4 +188,43 @@ strong {
   width: 24px;
   height: 24px;
   color: #fff; /* Ícono blanco */
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  .carousel-item {
+    width: 140px; /* Reducir el tamaño de los ítems en pantallas pequeñas */
+  }
+
+  .thumbnail {
+    height: 200px; /* Ajustar la altura de las miniaturas */
+  }
+
+  .icon-container {
+    padding: 12px; /* Reducir el padding en pantallas pequeñas */
+  }
+
+  strong {
+    font-size: 1.2rem; /* Reducir el tamaño del texto */
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-item {
+    width: 120px; /* Reducir aún más el tamaño de los ítems */
+  }
+
+  .thumbnail {
+    height: 150px; /* Ajustar la altura de las miniaturas */
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px; /* Reducir el tamaño de los íconos */
+  }
+
+  .fab-button {
+    width: 48px;
+    height: 48px; /* Reducir el tamaño de los botones flotantes */
+  }
 }

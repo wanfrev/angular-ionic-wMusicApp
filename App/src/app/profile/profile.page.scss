@@ -3,25 +3,20 @@
   height: 100vh;
   background: #1e1e1e; /* Fondo oscuro */
   color: #f0f0f0; /* Texto claro */
-}
-
-#container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  padding: 16px;
-  background: #2a2a2a; /* Fondo del contenedor */
-  border-radius: 20px;
-  box-shadow: 8px 8px 15px #141414, -8px -8px 15px #3e3e3e; /* Sombras para neumorfismo */
+  position: relative; /* Para posicionar el botón de volver */
 }
 
 .icon {
-  width: 32px;
-  height: 32px;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 40px; /* Más grande */
+  height: 40px;
   cursor: pointer;
-  margin: 16px;
   color: #f0f0f0; /* Color claro para el ícono */
   transition: color 0.3s, transform 0.3s;
 }
@@ -31,33 +26,84 @@
   transform: scale(1.1); /* Efecto de zoom */
 }
 
+#container {
+  text-align: center; /* Centrar el contenido */
+}
+
 strong {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
+  font-size: 2.5rem; /* Más grande */
+  margin-bottom: 24px;
   color: #f0f0f0; /* Texto claro */
   text-shadow: 2px 2px 4px #141414; /* Sombra para el texto */
 }
 
 p {
-  font-size: 16px;
-  margin: 8px 0;
-  color: #888; /* Texto gris */
+  font-size: 1.2rem; /* Más grande */
+  margin: 12px 0;
+  color: #aaa; /* Texto gris claro */
 }
 
 .signout-button {
-  padding: 12px 24px;
-  margin-top: 20px;
-  background: #2a2a2a; /* Fondo oscuro */
-  color: #fff; /* Texto blanco */
+  padding: 16px 32px; /* Tamaño del botón */
+  margin-top: 32px;
+  background: #1e1e1e; /* Fondo oscuro */
+  color: #f0f0f0; /* Texto blanco */
   border: none;
-  border-radius: 25px;
-  font-size: 16px;
+  border-radius: 30px; /* Bordes redondeados */
+  font-size: 1.2rem; /* Tamaño del texto */
   cursor: pointer;
-  box-shadow: 5px 5px 10px #141414, -5px -5px 10px #3e3e3e; /* Sombras para neumorfismo */
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.6), -1px -1px 12px rgba(255, 255, 255, 0.1); /* Sombras suaves */
   transition: all 0.3s ease;
 }
 
 .signout-button:hover {
-  background: #3e3e3e; /* Fondo más claro al pasar el cursor */
-  box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #3e3e3e; /* Sombras internas */
+  background: #2a2a2a; /* Fondo más claro al pasar el cursor */
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.6), inset -4px -4px 8px rgba(255, 255, 255, 0.1); /* Sombras internas */
+  transform: scale(1.05); /* Efecto de zoom */
+}
+
+.signout-button:active {
+  background: #1a1a1a; /* Fondo más oscuro al hacer clic */
+  box-shadow: inset 6px 6px 12px rgba(0, 0, 0, 0.8), inset -6px -6px 12px rgba(255, 255, 255, 0.1); /* Sombras más profundas */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .icon {
+    width: 36px;
+    height: 36px; /* Reducir el tamaño del ícono */
+  }
+
+  strong {
+    font-size: 2rem; /* Reducir el tamaño del texto */
+  }
+
+  p {
+    font-size: 1rem; /* Reducir el tamaño del texto */
+  }
+
+  .signout-button {
+    padding: 12px 24px;
+    font-size: 1rem; /* Reducir el tamaño del botón */
+  }
+}
+
+@media (max-width: 480px) {
+  .icon {
+    width: 32px;
+    height: 32px; /* Reducir el tamaño del ícono */
+  }
+
+  strong {
+    font-size: 1.8rem; /* Reducir aún más el tamaño del texto */
+  }
+
+  p {
+    font-size: 0.9rem; /* Reducir el tamaño del texto */
+  }
+
+  .signout-button {
+    padding: 10px 20px;
+    font-size: 0.9rem; /* Reducir el tamaño del botón */
+  }
 }

@@ -119,8 +119,9 @@ router.get('/popular-tracks', async (req, res) => {
   try {
     const token = await getValidSpotifyAccessToken();
 
+    // Playlist: Today's Top Hits (ID global que siempre funciona)
     const response = await axios.get(
-      'https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks',
+      'https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks',
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -142,8 +143,8 @@ router.get('/popular-tracks', async (req, res) => {
 
     res.json({ tracks });
   } catch (error) {
-    console.error('Error al obtener canciones populares:', error.message);
-    res.status(500).json({ error: 'Error al obtener canciones populares' });
+    console.error('Error al obtener canciones populares:', error.response?.data || error.message);
+    res.status(500).json({ error: 'Error al obtener canciones populares', details: error.response?.data || error.message });
   }
 });
 
@@ -180,7 +181,10 @@ router.get('/featured-playlists', async (req, res) => {
 
     const response = await axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
       headers: { Authorization: `Bearer ${token}` },
-      params: { country: 'US', limit: 10 }
+      params: {
+        country: 'US', // País asegurado
+        limit: 10
+      }
     });
 
     const playlists = response.data.playlists.items.map(p => ({
@@ -192,8 +196,8 @@ router.get('/featured-playlists', async (req, res) => {
 
     res.json({ playlists });
   } catch (error) {
-    console.error('Error al obtener playlists destacadas:', error.message);
-    res.status(500).json({ error: 'No se pudieron obtener las playlists destacadas' });
+    console.error('Error al obtener playlists destacadas:', error.response?.data || error.message);
+    res.status(500).json({ error: 'No se pudieron obtener las playlists destacadas', details: error.response?.data || error.message });
   }
 });
 

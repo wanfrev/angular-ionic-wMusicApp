@@ -16,34 +16,29 @@ export class HomePage implements OnInit {
   exploreSongs: any[] = [];
   popularTracks: any[] = [];
   newReleases: any[] = [];
+  recommendedTracks: any[] = [];
 
   constructor(private spotifyService: SpotifyService, private router: Router) {}
 
   ngOnInit() {
     this.spotifyService.getFeaturedPlaylists().subscribe({
-      next: res => {
-        this.exploreSongs = res.playlists.map((p: any) => ({
-          id: p.id,
-          title: p.name,
-          artist: p.description,
-          albumCover: p.imageUrl
-        }));
-      },
-      error: err => console.error('Error en featured:', err)
+      next: (res) => (this.exploreSongs = res.playlists),
+      error: (err) => console.error('Error en featured:', err),
     });
 
     this.spotifyService.getPopularTracks().subscribe({
-      next: res => {
-        this.popularTracks = res.tracks;
-      },
-      error: err => console.error('Error en populares:', err)
+      next: (res) => (this.popularTracks = res.tracks),
+      error: (err) => console.error('Error en populares:', err),
     });
 
     this.spotifyService.getNewReleases().subscribe({
-      next: res => {
-        this.newReleases = res.releases;
-      },
-      error: err => console.error('Error en lanzamientos:', err)
+      next: (res) => (this.newReleases = res.releases),
+      error: (err) => console.error('Error en lanzamientos:', err),
+    });
+
+    this.spotifyService.getRecommendations().subscribe({
+      next: (res) => (this.recommendedTracks = res.recommendations),
+      error: (err) => console.error('Error en recomendaciones:', err),
     });
   }
 

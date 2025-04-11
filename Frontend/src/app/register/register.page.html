@@ -1,11 +1,9 @@
 <ion-content [fullscreen]="true">
   <div class="register-container">
     <div class="register-card">
-      <h1>Crear Cuenta</h1>
-      <p>Regístrate para continuar</p>
       <form (ngSubmit)="register()">
         <ion-item class="custom-item">
-          <ion-label position="floating">Nombre de Usuario</ion-label>
+          <ion-label position="floating">Username</ion-label>
           <ion-input
             type="text"
             [(ngModel)]="username"
@@ -15,7 +13,7 @@
         </ion-item>
 
         <ion-item class="custom-item">
-          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-label position="floating">Email</ion-label>
           <ion-input
             type="email"
             [(ngModel)]="email"
@@ -25,7 +23,7 @@
         </ion-item>
 
         <ion-item class="custom-item">
-          <ion-label position="floating">Contraseña</ion-label>
+          <ion-label position="floating">Password</ion-label>
           <ion-input
             type="password"
             [(ngModel)]="password"
@@ -34,26 +32,16 @@
           ></ion-input>
         </ion-item>
 
-        <ion-item class="custom-item">
-          <ion-label position="floating">Confirmar Contraseña</ion-label>
-          <ion-input
-            type="password"
-            [(ngModel)]="confirmPassword"
-            name="confirmPassword"
-            required
-          ></ion-input>
-        </ion-item>
-
-        <button type="submit" class="btn-register">Registrarse</button>
+        <button type="submit" class="btn-register">Register</button>
       </form>
 
       <div class="nav-link">
-        <p>¿Ya tienes una cuenta?</p>
+        <p>Already have an account?</p>
         <button
           (click)="navigateToLogin()"
           class="custom-button"
         >
-          Inicia Sesión
+          Log In
         </button>
       </div>
     </div>

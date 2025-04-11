@@ -1,12 +1,46 @@
-/* Estilo general */
 ion-content {
-  --background: linear-gradient(to top, #000000, #1f1b45, #563494 ,#6a679e);
-  color: #fff; /* Texto blanco */
+  --background: #1e1e2f;
+  color: #fff;
   padding: 10px;
 }
 
-ion-button {
-  border-radius: 20px;
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  background: #1e1e2f;
+  box-shadow: 0 5px 10px #14141f, 0 -5px 10px #28283f;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+#menuButton {
+  background: #1e1e2f;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 5px 10px #14141f, -5px -5px 10px #28283f;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+#menuButton:hover {
+  box-shadow: inset 5px 5px 10px #14141f, inset -5px -5px 10px #28283f;
 }
 
 .username-display {
@@ -16,83 +50,102 @@ ion-button {
   font-weight: bold;
 }
 
-/* Canciones Recientes */
-.track-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas por lado */
-  gap: 15px; /* Espaciado entre elementos */
+#logoutButton {
+  background: #1e1e2f;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 5px 5px 10px #14141f, -5px -5px 10px #28283f;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
 }
 
+#logoutButton:hover {
+  box-shadow: inset 5px 5px 10px #14141f, inset -5px -5px 10px #28283f;
+}
 
+/* Buttons */
+ion-button {
+  border-radius: 20px;
+  background: #1e1e2f;
+  color: #fff;
+  box-shadow: 5px 5px 10px #14141f, -5px -5px 10px #28283f;
+  transition: box-shadow 0.3s ease;
+}
+
+ion-button:hover {
+  box-shadow: inset 5px 5px 10px #14141f, inset -5px -5px 10px #28283f;
+}
+
+/* Username display */
+.username-display {
+  font-size: 16px;
+  color: #fff;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+/* Recent songs */
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
 
 .track-item {
   display: flex;
   height: 60px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 5px;
   flex-direction: row;
   align-items: center;
-  background: #181818;
+  background: #1e1e2f;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease-in-out;
+  box-shadow: 5px 5px 10px #14141f, -5px -5px 10px #28283f;
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .track-item:hover {
   transform: scale(1.05);
+  box-shadow: inset 5px 5px 10px #14141f, inset -5px -5px 10px #28283f;
 }
 
 .track-image {
-  padding: 0; /* Elimina el padding para evitar desalineación */
-  width: 60px; /* Asegura que la imagen sea cuadrada */
+  width: 60px;
+  height: 60px;
   border-radius: 10px;
-  object-fit: cover; /* Escala la imagen para llenar el contenedor sin deformarse */
-  object-position: center; /* Centra la imagen dentro del contenedor */
+  object-fit: cover;
+  margin-right: 10px;
 }
 
 .track-info h3 {
   font-size: 14px;
   font-weight: bold;
   color: #fff;
-  text-align: center;
   margin: 0;
-  margin-left: 5px;
 }
-
-/* Botón circular */
-#menuButton {
-  background: #563494;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  cursor: pointer;
-}
-
-
 
 /* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
-  left: -250px; /* Oculta la barra lateral inicialmente */
+  left: -250px;
   width: 250px;
   height: 100%;
-  background-color: #181818;
-  color: white;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  background: #1e1e2f;
+  color: #fff;
+  box-shadow: 5px 0 10px #14141f, -5px 0 10px #28283f;
   transition: left 0.3s ease;
   z-index: 1000;
-  padding-top: 60px; /* Agrega espacio para evitar que quede muy arriba */
+  padding-top: 60px;
 }
 
 .sidebar.open {
-  left: 0; /* Muestra la barra lateral */
+  left: 0;
 }
 
 .sidebar-header {
@@ -100,64 +153,96 @@ ion-button {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background-color: #202020;
-  border-bottom: 1px solid #333;
+  background: #1e1e2f;
+  box-shadow: 0 5px 10px #14141f, 0 -5px 10px #28283f;
 }
 
 .sidebar-header .close-btn {
-  background: #563494;
-  border-radius: 100%;
-  color: white;
-  width: 15px;
+  background: #1e1e2f;
+  border-radius: 50%;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 5px 10px #14141f, -5px -5px 10px #28283f;
   cursor: pointer;
 }
 
-.sidebar-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.sidebar-header .close-btn:hover {
+  box-shadow: inset 5px 5px 10px #14141f, inset -5px -5px 10px #28283f;
 }
 
 .sidebar-menu li {
   padding: 15px;
   display: flex;
   align-items: center;
+  background: #1e1e2f;
+  border-radius: 10px;
+  margin: 5px 10px;
+  box-shadow: 5px 5px 10px #14141f, -5px -5px 10px #28283f;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .sidebar-menu li:hover {
-  background-color: #333;
+  background-color: #28283f;
+  box-shadow: inset 5px 5px 10px #14141f, inset -5px -5px 10px #28283f;
 }
 
 .sidebar-menu ion-icon {
   margin-right: 10px;
 }
 
-.popular-albums {
-  margin-top: 20px;
-}
-
-.popular-albums h2 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #fff;
-}
-
 .carousel {
   display: flex;
   overflow-x: auto;
-  gap: 10px;
+  scroll-snap-type: x mandatory;
+  gap: 15px;
   padding: 10px 0;
-  scroll-behavior: smooth;
+
+  /* Estilo de la barra de desplazamiento */
+  scrollbar-width: thin; /* Para navegadores compatibles */
+  scrollbar-color: #28283f #1e1e2f; /* Color del thumb y del track */
+}
+
+.carousel::-webkit-scrollbar {
+  height: 8px; /* Altura de la barra de desplazamiento */
+}
+
+.carousel::-webkit-scrollbar-track {
+  background: #1e1e2f; /* Fondo del track */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: inset 5px 5px 10px #14141f, inset -5px -5px 10px #28283f; /* Neumorfismo interno */
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #28283f; /* Color del thumb */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 5px 5px 10px #14141f, -5px -5px 10px #28283f; /* Neumorfismo externo */
+}
+
+.carousel::-webkit-scrollbar-thumb:hover {
+  background: #3a3a4f; /* Color más claro al pasar el mouse */
 }
 
 .carousel-item {
   flex: 0 0 auto;
+  scroll-snap-align: center;
   width: 120px;
   text-align: center;
   color: #fff;
+  background: #1e1e2f;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #14141f, -5px -5px 10px #28283f;
+  padding: 10px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+}
+
+.carousel-item:hover {
+  transform: scale(1.05);
+  box-shadow: inset 5px 5px 10px #14141f, inset -5px -5px 10px #28283f;
 }
 
 .carousel-item img {
@@ -174,99 +259,19 @@ ion-button {
   margin-top: 5px;
 }
 
-.recommended-songs {
-  margin-top: 20px;
-
-  h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-
-  .carousel-item {
-    flex: 0 0 auto;
-    width: 120px;
-    text-align: center;
-    color: #fff;
-
-    img {
-      width: 100%;
-      height: 120px;
-      border-radius: 10px;
-      object-fit: cover;
-      margin-bottom: 5px;
-    }
-
-    span {
-      font-size: 14px;
-      display: block;
-      margin-top: 5px;
-    }
-  }
-}
-.available-genres {
-  margin-top: 20px;
-
-  h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-
-  .genres-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-
-    button {
-      background: #563494;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-
-      &:hover {
-        background: #6a679e;
-      }
-    }
-  }
+/* Genres */
+.genres-list button {
+  background: #1e1e2f;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px #14141f, -5px -5px 10px #28283f;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.recommended-songs {
-  margin-top: 20px;
-
-  h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-
-  .carousel-item {
-    flex: 0 0 auto;
-    width: 120px;
-    text-align: center;
-    color: #fff;
-
-    img {
-      width: 100%;
-      height: 120px;
-      border-radius: 10px;
-      object-fit: cover;
-      margin-bottom: 5px;
-    }
-
-    span {
-      font-size: 14px;
-      display: block;
-      margin-top: 5px;
-    }
-  }
-}
-.three-dots-btn {
-  background: none;
+.genres-list button:hover {
+  background: #28283f;
+  box-shadow: inset 5px 5px 10px #14141f, inset -5px -5px 10px #28283f;
 }

@@ -1,12 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Buscar Canciones</ion-title>
-    <ion-buttons slot="end" *ngIf="isModal">
-      <ion-button (click)="closeModal()">Cerrar</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <!-- Barra de búsqueda con HTML normal -->
   <div class="search-bar">
@@ -14,7 +5,7 @@
       type="text"
       placeholder="Buscar canciones o artistas..."
       [(ngModel)]="searchQuery"
-      (input)="search(searchQuery)" 
+      (input)="search(searchQuery)"
     />
   </div>
 

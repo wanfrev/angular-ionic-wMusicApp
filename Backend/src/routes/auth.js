@@ -1,3 +1,4 @@
+// filepath: c:\Users\luis3\OneDrive\Desktop\Spotify-Angular\backend\src\routes\auth.js
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -7,15 +8,10 @@ const router = express.Router();
 
 // Registro de usuario
 router.post('/register', async (req, res) => {
-  const { username, email, password, confirmPassword } = req.body;
+  const { username, email, password } = req.body;
 
-  // Validación básica
-  if (!username || !email || !password || !confirmPassword) {
+  if (!username || !email || !password) {
     return res.status(400).json({ error: 'Todos los campos son obligatorios' });
-  }
-
-  if (password !== confirmPassword) {
-    return res.status(400).json({ error: 'Las contraseñas no coinciden' });
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,88 +24,48 @@ router.post('/register', async (req, res) => {
   }
 
   try {
-    const existingUser = await User.findOne({ 
-      $or: [{ email }, { username }]
-    });
-
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: 'El correo o nombre de usuario ya está en uso' });
+      return res.status(400).json({ error: 'El usuario ya está registrado' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new User({
-      username,
-      email,
-      password: hashedPassword
-    });
-
+    const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
-    const token = jwt.sign({ id: newUser._id, email }, process.env.JWT_SECRET || 'secreto', {
-      expiresIn: '1h'
-    });
+    const token = jwt.sign({ id: newUser._id, email, username }, process.env.JWT_SECRET || 'secreto', { expiresIn: '1h' });
 
-    res.status(201).json({
-      token,
-      user: {
-        id: newUser._id,
-        username: newUser.username,
-        email: newUser.email
-      },
-      mensaje: 'Usuario registrado con éxito'
-    });
+    res.status(201).json({ token, user: { id: newUser._id, email, username }, mensaje: 'Usuario registrado con éxito' });
   } catch (error) {
     res.status(500).json({ error: 'Error al registrar usuario: ' + error.message });
   }
 });
 
-
 // Inicio de sesión
 router.post('/login', async (req, res) => {
-  const { login, password } = req.body;
+  const { username, password } = req.body; // Cambiado de email a username
 
-  // Validación básica
-  if (!login || !password) {
+  if (!username || !password) {
     return res.status(400).json({ error: 'Todos los campos son obligatorios' });
   }
 
   try {
-    // Buscar por email o username
-    const user = await User.findOne({
-      $or: [{ email: login }, { username: login }]
-    });
-
+    const user = await User.findOne({ username }); // Buscar por username
     if (!user) {
-      return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+      return res.status(401).json({ error: 'Nombre de usuario o contraseña incorrectos' });
     }
 
-    // Comparar la contraseña
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+      return res.status(401).json({ error: 'Nombre de usuario o contraseña incorrectos' });
     }
 
-    // Generar token
-    const token = jwt.sign(
-      { id: user._id, email: user.email, username: user.username },
-      process.env.JWT_SECRET || 'secreto',
-      { expiresIn: '1h' }
-    );
+    const token = jwt.sign({ id: user._id, username }, process.env.JWT_SECRET || 'secreto', { expiresIn: '1h' });
 
-    res.json({
-      token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email
-      },
-      mensaje: 'Inicio de sesión exitoso'
-    });
+    res.json({ token, user: { id: user._id, username }, mensaje: 'Inicio de sesión exitoso' });
   } catch (error) {
     res.status(500).json({ error: 'Error al iniciar sesión: ' + error.message });
   }
 });
-
 
 module.exports = router;

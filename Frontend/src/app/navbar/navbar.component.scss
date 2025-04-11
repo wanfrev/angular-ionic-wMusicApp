@@ -1,0 +1,41 @@
+.navbar {
+  // position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to top, #000000);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  backdrop-filter: blur(10px); /* Efecto de desenfoque para un diseño más moderno */
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column; /* Ícono encima del texto */
+  justify-content: center;
+  text-align: center;
+  color: #b3b3b3;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-item.active,
+.nav-item:hover {
+  color: #fff; /* Color blanco para el ítem activo o al pasar el mouse */
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px; /* Espaciado entre el ícono y el texto */
+}
+
+ion-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
